@@ -1,15 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaApple } from "react-icons/fa";
 
-const options = ["Finder", "File", "Edit", "View", "Go", "Window", "Help"];
-
-function TopBar() {
+function TopBar({ topBarMenuOptions, onOptionClick, selectedMenu }) {
+  const options = Object.keys(topBarMenuOptions);
   const [date, setDate] = useState(new Date());
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setDate(new Date());
-    }, 1000);
+    const interval = setInterval(() => setDate(new Date()), 1000);
     return () => clearInterval(interval);
   }, []);
 
@@ -29,40 +26,37 @@ function TopBar() {
       "Nov",
       "Dec",
     ];
-
     const day = weekdays[date.getDay()];
     const month = months[date.getMonth()];
     const dateNum = date.getDate();
-
     let hours = date.getHours();
     const minutes = date.getMinutes().toString().padStart(2, "0");
     const ampm = hours >= 12 ? "PM" : "AM";
     hours = hours % 12 || 12;
-
-    return {
-      time: `${hours}:${minutes} ${ampm}`,
-      date: `${day}, ${month} ${dateNum}`,
-    };
+    return `${day} ${month} ${dateNum} ${hours}:${minutes}${ampm}`;
   };
 
-  const { time, date: formattedDate } = formatMacTime(date);
-
   return (
-    <div className="text-white flex items-center text-sm gap-4 px-2 py-1 fixed top-0 w-full z-50 blurred-bg">
-      <FaApple className="text-lg" />
-
+    <div className="text-white flex items-center text-sm gap-4 bg-[#00000038] backdrop-blur-xl px-2 font-medium fixed top-0 w-full z-50 select-none">
+      <FaApple className="text-lg cursor-pointer" />
       <ul className="flex items-center list-none">
         {options.map((option, index) => (
-          <li key={index} className="mx-2">
+          <li
+            key={index}
+            className={`mx-1 cursor-pointer p-2 rounded ${
+              selectedMenu === option ? "bg-white/20" : ""
+            }`}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              onOptionClick(e, option);
+            }}
+          >
             {option}
           </li>
         ))}
       </ul>
-
-      <div className="ml-auto">
-        <span className="mr-4">{formattedDate}</span>
-        <span>{time}</span>
-      </div>
+      <div className="ml-auto mr-4">{formatMacTime(date)}</div>
     </div>
   );
 }

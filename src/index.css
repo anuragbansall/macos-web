@@ -5,5 +5,5 @@
 }
 
 .thin-border {
-  @apply border-[0.5px] border-zinc-500;
+  @apply border-white/30;
 }
