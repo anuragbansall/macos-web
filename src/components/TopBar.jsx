@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { FaApple } from "react-icons/fa";
 
+const options = ["Finder", "File", "Edit", "View", "Go", "Window", "Help"];
+
 function TopBar() {
-  const options = ["Finder", "File", "Edit", "View", "Go", "Window", "Help"];
   const [date, setDate] = useState(new Date());
 
   useEffect(() => {
@@ -36,13 +37,18 @@ function TopBar() {
     let hours = date.getHours();
     const minutes = date.getMinutes().toString().padStart(2, "0");
     const ampm = hours >= 12 ? "PM" : "AM";
-    hours = hours % 12 || 12; 
+    hours = hours % 12 || 12;
 
-    return `${day} ${month} ${dateNum} ${hours}:${minutes}${ampm}`;
+    return {
+      time: `${hours}:${minutes} ${ampm}`,
+      date: `${day}, ${month} ${dateNum}`,
+    };
   };
 
+  const { time, date: formattedDate } = formatMacTime(date);
+
   return (
-    <div className="text-white flex items-center text-sm gap-4 bg-[#00000038] backdrop-blur-xl px-2 py-1 fixed top-0 w-full z-50">
+    <div className="text-white flex items-center text-sm gap-4 px-2 py-1 fixed top-0 w-full z-50 blurred-bg">
       <FaApple className="text-lg" />
 
       <ul className="flex items-center list-none">
@@ -54,7 +60,8 @@ function TopBar() {
       </ul>
 
       <div className="ml-auto">
-        <span className="mr-4 ">{formatMacTime(date)}</span>
+        <span className="mr-4">{formattedDate}</span>
+        <span>{time}</span>
       </div>
     </div>
   );

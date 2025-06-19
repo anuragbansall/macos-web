@@ -1,1 +1,9 @@
 @import "tailwindcss";
+
+.blurred-bg {
+  @apply bg-[#00000038] backdrop-blur-xl;
+}
+
+.thin-border {
+  @apply border-[0.5px] border-zinc-500;
+}
