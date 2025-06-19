@@ -60,8 +60,8 @@ function App() {
     const timer = setInterval(() => {
       setBootedPercent((prev) => {
         if (prev >= 100) {
-          setBooted(true);
           clearInterval(timer);
+          setTimeout(() => setBooted(true), 500);
           return 100;
         }
         return prev + 10;
