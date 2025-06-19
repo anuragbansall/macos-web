@@ -33,12 +33,18 @@ function TopBar({ topBarMenuOptions, onOptionClick, selectedMenu }) {
     const minutes = date.getMinutes().toString().padStart(2, "0");
     const ampm = hours >= 12 ? "PM" : "AM";
     hours = hours % 12 || 12;
-    return `${day} ${month} ${dateNum} ${hours}:${minutes}${ampm}`;
+
+    return {
+      date: `${day}, ${month} ${dateNum}`,
+      time: `${hours}:${minutes} ${ampm}`,
+    };
   };
+
+  const { date: formattedDate, time: formattedTime } = formatMacTime(date);
 
   return (
     <div className="text-white flex items-center text-sm gap-4 bg-[#00000038] backdrop-blur-xl px-2 font-medium fixed top-0 w-full z-50 select-none">
-      <FaApple className="text-lg cursor-pointer" />
+      <FaApple className="text-lg cursor-pointer ml-2" />
       <ul className="flex items-center list-none">
         {options.map((option, index) => (
           <li
@@ -56,7 +62,10 @@ function TopBar({ topBarMenuOptions, onOptionClick, selectedMenu }) {
           </li>
         ))}
       </ul>
-      <div className="ml-auto mr-4">{formatMacTime(date)}</div>
+      <div className="ml-auto mr-4">
+        <span className="font-semibold">{formattedDate}</span>
+        <span className="ml-3">{formattedTime}</span>
+      </div>
     </div>
   );
 }

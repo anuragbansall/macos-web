@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TopBar from "./components/TopBar";
 import Dock from "./components/Dock";
 import ContextMenu from "./components/ContextMenu";
+import BootScreen from "./components/BootScreen";
 
 const contextMenuOptions = [
   "New Folder",
@@ -25,9 +26,10 @@ const topBarMenuOptions = {
 };
 
 function App() {
+  const [booted, setBooted] = useState(false);
+  const [bootedPercent, setBootedPercent] = useState(0);
   const [contextMenuPos, setContextMenuPos] = useState({ x: 0, y: 0 });
   const [showContextMenu, setShowContextMenu] = useState(false);
-
   const [topMenu, setTopMenu] = useState(null);
 
   const handleContextMenu = (e) => {
@@ -54,12 +56,29 @@ function App() {
     setTopMenu(null);
   };
 
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setBootedPercent((prev) => {
+        if (prev >= 100) {
+          setBooted(true);
+          clearInterval(timer);
+          return 100;
+        }
+        return prev + 10;
+      });
+    }, 500);
+
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <div
       className="relative h-screen w-screen overflow-hidden bg-[url('../public/wallpapers/wallpaper.jpg')] bg-cover bg-center select-none"
       onContextMenu={handleContextMenu}
       onClick={handleCloseMenus}
     >
+      {!booted && <BootScreen bootedPercent={bootedPercent} />}
+
       <TopBar
         topBarMenuOptions={topBarMenuOptions}
         onOptionClick={handleTopMenuClick}
