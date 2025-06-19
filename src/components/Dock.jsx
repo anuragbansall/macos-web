@@ -1,5 +1,5 @@
 import React from "react";
-import FinderIcon from "../assets/icons/finder.png";
+import FinderIcon from "../assets/icons/Finder.webp";
 import WallpapersIcon from "../assets/icons/Wallpapers.webp";
 import CalculatorIcon from "../assets/icons/Calculator.webp";
 import CalendarIcon from "../assets/icons/Calender.webp";
