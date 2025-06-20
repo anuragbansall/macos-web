@@ -18,6 +18,7 @@ import Wallpapers from "./apps/Wallpapers";
 import Calculator from "./apps/Calculator";
 import Finder from "./apps/Finder";
 import Safari from "./apps/Safari";
+import Developer from "./apps/Developer";
 
 const contextMenuOptions = [
   "New Folder",
@@ -190,6 +191,7 @@ function App() {
           {app.name === "Wallpapers" ? <Wallpapers /> : null}
           {app.name === "Calculator" ? <Calculator /> : null}
           {app.name === "Safari" ? <Safari /> : null}
+          {app.name === "Developer" ? <Developer /> : null}
           {/* <div className="text-center text-white min-h-[300px] flex items-center justify-center flex-col gap-4 text-2xl font-semibold">
             <img src={app.icon} alt={app.name} className="w-12 h-12" />
             <h1>Welcome to {app.name}!</h1>
