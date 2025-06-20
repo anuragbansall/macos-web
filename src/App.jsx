@@ -132,14 +132,6 @@ function App() {
     setTopZIndex((z) => z + 1);
   };
 
-  const handleAppDrag = (appName, x, y) => {
-    setOpenedApps((prev) =>
-      prev.map((app) =>
-        app.name === appName ? { ...app, position: { x, y } } : app
-      )
-    );
-  };
-
   useEffect(() => {
     const timer = setInterval(() => {
       setBootedPercent((prev) => {
@@ -181,7 +173,6 @@ function App() {
           onClose={() =>
             setOpenedApps((prev) => prev.filter((a) => a.name !== app.name))
           }
-          onDragEnd={(x, y) => handleAppDrag(app.name, x, y)}
           reference={ref}
         >
           <div className="text-center text-white min-h-[300px] flex items-center justify-center flex-col gap-4 text-2xl font-semibold">
