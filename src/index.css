@@ -5,5 +5,5 @@
 }
 
 .thin-border {
-  @apply border-white/30;
+  @apply border border-white/30;
 }
