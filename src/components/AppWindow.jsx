@@ -26,7 +26,7 @@ function AppWindow({
       onDrag={onClick}
       style={{ top: position.y, left: position.x, zIndex }}
     >
-      <div className="p-2 flex items-center gap-2 group w-fit active:cursor-grabbing">
+      <div className="p-2 flex items-center gap-2 group w-fit">
         {[
           {
             name: "Close",

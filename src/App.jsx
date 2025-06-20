@@ -182,7 +182,7 @@ function App() {
         </AppWindow>
       ))}
 
-      <div className="absolute z-999 bottom-0 left-0 w-full p-2">
+      <div className="absolute z-8888 bottom-0 left-0 w-full p-2">
         <Dock
           apps={apps}
           handleAppClick={handleAppClick}
