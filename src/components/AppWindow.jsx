@@ -26,7 +26,7 @@ function AppWindow({
       onDrag={onClick}
       style={{ top: position.y, left: position.x, zIndex }}
     >
-      <div className="p-2 flex items-center gap-2 group w-fit">
+      <div className="p-3 flex items-center gap-2 group w-fit">
         {[
           {
             name: "Close",
@@ -62,7 +62,7 @@ function AppWindow({
         ))}
       </div>
 
-      <div>{children}</div>
+      <div className="h-[300px] w-full p-3 overflow-auto">{children}</div>
     </motion.div>
   );
 }

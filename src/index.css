@@ -1,5 +1,18 @@
 @import "tailwindcss";
 
+/* macos scrollbar */
+*::-webkit-scrollbar {
+  @apply w-2 h-2;
+}
+
+*::-webkit-scrollbar-thumb {
+  @apply bg-[#888] rounded-full;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  @apply bg-[#555];
+}
+
 .blurred-bg {
   @apply bg-[#00000038] backdrop-blur-xl;
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import TopBar from "./components/TopBar";
 import Dock from "./components/Dock";
 import ContextMenu from "./components/ContextMenu";
@@ -13,6 +13,8 @@ import MusicIcon from "./assets/icons/Music.webp";
 import PodcastsIcon from "./assets/icons/Podcasts.webp";
 import DeveloperIcon from "./assets/icons/Github.webp";
 import AppWindow from "./components/AppWindow";
+import { WallpaperContext } from "./context/WallpaperContextProvider";
+import Wallpapers from "./apps/Wallpapers";
 
 const contextMenuOptions = [
   "New Folder",
@@ -78,6 +80,9 @@ function App() {
   const [topMenu, setTopMenu] = useState(null);
   const [openedApps, setOpenedApps] = useState([]);
   const [topZIndex, setTopZIndex] = useState(1000);
+
+  const { selectedWallpaper } = useContext(WallpaperContext);
+  console.log("Selected Wallpaper:", selectedWallpaper);
 
   const ref = useRef(null);
 
@@ -149,7 +154,10 @@ function App() {
 
   return (
     <div
-      className="relative h-screen w-screen overflow-hidden bg-[url('../public/wallpapers/wallpaper.jpg')] bg-cover bg-center select-none"
+      className="relative h-screen w-screen overflow-hidden bg-cover bg-center select-none"
+      style={{
+        backgroundImage: `url(${selectedWallpaper.url})`,
+      }}
       onContextMenu={handleContextMenu}
       onClick={handleCloseMenus}
       ref={ref}
@@ -175,10 +183,11 @@ function App() {
           }
           reference={ref}
         >
-          <div className="text-center text-white min-h-[300px] flex items-center justify-center flex-col gap-4 text-2xl font-semibold">
+          {app.name === "Wallpapers" ? <Wallpapers /> : null}
+          {/* <div className="text-center text-white min-h-[300px] flex items-center justify-center flex-col gap-4 text-2xl font-semibold">
             <img src={app.icon} alt={app.name} className="w-12 h-12" />
             <h1>Welcome to {app.name}!</h1>
-          </div>
+          </div> */}
         </AppWindow>
       ))}
 
