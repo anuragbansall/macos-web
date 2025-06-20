@@ -12,27 +12,21 @@ function AppWindow({
   position,
   zIndex,
   onClick,
-  onDragEnd = () => {},
+  reference,
 }) {
   return (
     <motion.div
+      drag
+      dragConstraints={reference}
+      dragElastic={0}
+      dragMomentum={false}
+      dragTransition={{ bounceStiffness: 600, bounceDamping: 20 }}
       className="fixed bg-[#1e1e1e] thin-border rounded-xl text-white shadow-xl shadow-[#00000064] z-[998] w-[450px] overflow-hidden"
       onClick={onClick}
       onDrag={onClick}
       style={{ top: position.y, left: position.x, zIndex }}
-      drag
-      onDragEnd={(e, { point }) => {
-        onDragEnd(point.x, point.y);
-      }}
-      dragConstraints={{
-        top: 0,
-        left: 0,
-        right: window.innerWidth - 450,
-        bottom: window.innerHeight - 300,
-      }}
-      dragElastic={1}
     >
-      <div className="p-2 flex items-center gap-2 group w-fit">
+      <div className="p-2 flex items-center gap-2 group w-fit active:cursor-grabbing">
         {[
           {
             name: "Close",

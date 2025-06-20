@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import TopBar from "./components/TopBar";
 import Dock from "./components/Dock";
 import ContextMenu from "./components/ContextMenu";
@@ -79,6 +79,8 @@ function App() {
   const [openedApps, setOpenedApps] = useState([]);
   const [topZIndex, setTopZIndex] = useState(1000);
 
+  const ref = useRef(null);
+
   const handleContextMenu = (e) => {
     e.preventDefault();
     setShowContextMenu(true);
@@ -158,6 +160,7 @@ function App() {
       className="relative h-screen w-screen overflow-hidden bg-[url('../public/wallpapers/wallpaper.jpg')] bg-cover bg-center select-none"
       onContextMenu={handleContextMenu}
       onClick={handleCloseMenus}
+      ref={ref}
     >
       {!booted && <BootScreen bootedPercent={bootedPercent} />}
 
@@ -179,6 +182,7 @@ function App() {
             setOpenedApps((prev) => prev.filter((a) => a.name !== app.name))
           }
           onDragEnd={(x, y) => handleAppDrag(app.name, x, y)}
+          reference={ref}
         >
           <div className="text-center text-white min-h-[300px] flex items-center justify-center flex-col gap-4 text-2xl font-semibold">
             <img src={app.icon} alt={app.name} className="w-12 h-12" />
