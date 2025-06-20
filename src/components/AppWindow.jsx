@@ -62,7 +62,7 @@ function AppWindow({
         ))}
       </div>
 
-      <div className="h-[300px] w-full p-3 overflow-auto">{children}</div>
+      <div className="w-full p-3">{children}</div>
     </motion.div>
   );
 }

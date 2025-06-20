@@ -15,6 +15,7 @@ import DeveloperIcon from "./assets/icons/Github.webp";
 import AppWindow from "./components/AppWindow";
 import { WallpaperContext } from "./context/WallpaperContextProvider";
 import Wallpapers from "./apps/Wallpapers";
+import Calculator from "./apps/Calculator";
 
 const contextMenuOptions = [
   "New Folder",
@@ -184,6 +185,7 @@ function App() {
           reference={ref}
         >
           {app.name === "Wallpapers" ? <Wallpapers /> : null}
+          {app.name === "Calculator" ? <Calculator /> : null}
           {/* <div className="text-center text-white min-h-[300px] flex items-center justify-center flex-col gap-4 text-2xl font-semibold">
             <img src={app.icon} alt={app.name} className="w-12 h-12" />
             <h1>Welcome to {app.name}!</h1>

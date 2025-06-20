@@ -10,7 +10,7 @@ function Wallpapers() {
   };
 
   return (
-    <div className="h-full w-full flex flex-col items-center gap-4 p-2">
+    <div className="h-[300px] overflow-auto w-full flex flex-col items-center gap-4 p-2">
       {wallpapers.map((wallpaper) => (
         <div
           key={wallpaper.id}
