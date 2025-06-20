@@ -16,6 +16,8 @@ import AppWindow from "./components/AppWindow";
 import { WallpaperContext } from "./context/WallpaperContextProvider";
 import Wallpapers from "./apps/Wallpapers";
 import Calculator from "./apps/Calculator";
+import Finder from "./apps/Finder";
+import Safari from "./apps/Safari";
 
 const contextMenuOptions = [
   "New Folder",
@@ -184,8 +186,10 @@ function App() {
           }
           reference={ref}
         >
+          {app.name === "Finder" ? <Finder /> : null}
           {app.name === "Wallpapers" ? <Wallpapers /> : null}
           {app.name === "Calculator" ? <Calculator /> : null}
+          {app.name === "Safari" ? <Safari /> : null}
           {/* <div className="text-center text-white min-h-[300px] flex items-center justify-center flex-col gap-4 text-2xl font-semibold">
             <img src={app.icon} alt={app.name} className="w-12 h-12" />
             <h1>Welcome to {app.name}!</h1>
